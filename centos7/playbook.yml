@@ -4,8 +4,15 @@
   tasks:
     - name: ensure open-vm-tools is at the latest version
       become: yes
-      yum:
+      package:
         name: open-vm-tools
+        state: latest
+        update_cache: yes
+
+    - name: ensure wget is at the latest version
+      become: yes
+      package:
+        name: wget
         state: latest
         update_cache: yes
 
