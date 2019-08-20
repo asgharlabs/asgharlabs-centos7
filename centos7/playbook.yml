@@ -1,7 +1,24 @@
 ---
 - hosts: all
-
   tasks:
+
+    - debug:
+        msg: "Disabling the firewall on: {{ ansible_hostname }}"
+
+    - name: Stop and disable firewalld.
+      service:
+       name: firewalld
+       state: stopped
+       enabled: False
+
+    - debug:
+        msg: "Performing Yum update of server {{ ansible_hostname }}"
+
+     - name: Perform yum update of all packages
+         yum:
+           name: '*'
+           state: latest
+
     - name: ensure open-vm-tools is at the latest version
       become: yes
       package:
